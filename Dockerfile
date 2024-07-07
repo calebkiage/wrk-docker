@@ -22,7 +22,7 @@ RUN git clone https://github.com/giltene/wrk2.git --depth=1 && cd wrk2 && make &
 
 
 FROM alpine:3 AS wrk
-RUN apk add --no-cache gcc
+RUN apk add --no-cache libgcc
 COPY --from=build-wrk /src/wrk/wrk /bin
 RUN adduser -H -D wrk
 USER wrk
@@ -30,7 +30,7 @@ CMD [ "/bin/wrk", "--help" ]
 
 
 FROM alpine:3 AS wrk2
-RUN apk add --no-cache gcc
+RUN apk add --no-cache libgcc
 COPY --from=build-wrk2 /src/wrk2/wrk2 /bin
 RUN adduser -H -D wrk2
 USER wrk2
